@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Algorithms
 
 public class RSA {
     private init() {}
@@ -41,8 +42,7 @@ public class RSA {
         }
         let blockSize = SecKeyGetBlockSize(key) - 11
         var buffers = Data()
-        for textDataIndex in stride(from: 0, to: textData.count, by: blockSize) {
-            let part = textData[textDataIndex..<(textDataIndex + blockSize)]
+        for part in textData.chunks(ofCount: blockSize) {
             var error: Unmanaged<CFError>?
             guard let buffer = SecKeyCreateEncryptedData(key, .rsaEncryptionPKCS1, part as CFData, &error) else {
                 if let error = error {

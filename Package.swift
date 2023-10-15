@@ -11,9 +11,18 @@ let package = Package(
             targets: ["SwiftCryptoExtension"]
         ),
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/apple/swift-algorithms.git",
+            .upToNextMajor(from: "1.1.0")
+        )
+    ],
     targets: [
         .target(
-            name: "SwiftCryptoExtension"
+            name: "SwiftCryptoExtension",
+            dependencies: [
+                .product(name: "Algorithms", package: "swift-algorithms"),
+            ]
         ),
     ]
 )
