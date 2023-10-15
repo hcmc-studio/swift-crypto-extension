@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftCryptoExtension",
+    platforms: [
+        .macOS("10.15")
+    ],
     products: [
         .library(
             name: "SwiftCryptoExtension",
@@ -15,7 +18,7 @@ let package = Package(
         .package(
             url: "https://github.com/apple/swift-algorithms.git",
             .upToNextMajor(from: "1.1.0")
-        )
+        ),
     ],
     targets: [
         .target(

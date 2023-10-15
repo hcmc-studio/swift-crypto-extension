@@ -7,8 +7,9 @@
 
 import Foundation
 import Algorithms
+import CryptoKit
 
-public class RSA {
+public final class RSA {
     private init() {}
     
     public static func encrypt(plain text: String, public key: String, size: Int) throws -> String {
@@ -17,7 +18,7 @@ public class RSA {
     
     private static func createPublicKey(key string: String, size: Int) throws -> SecKey {
         guard let keyData = Data(base64Encoded: string) else {
-            throw SwiftCryptoExtensionLocalError.RSA.PublicKeyBase64Error
+            throw SwiftCryptoExtensionLocalError.RSA.PublicKeyError
         }
         
         var error: Unmanaged<CFError>?
@@ -38,7 +39,7 @@ public class RSA {
     
     private static func encrypt(plain text: String, key: SecKey) throws -> String {
         guard let textData = text.data(using: .utf8) else {
-            throw SwiftCryptoExtensionLocalError.RSA.PlainTextDecodeError
+            throw SwiftCryptoExtensionLocalError.RSA.PlainTextError
         }
         let blockSize = SecKeyGetBlockSize(key) - 11
         var buffers = Data()
