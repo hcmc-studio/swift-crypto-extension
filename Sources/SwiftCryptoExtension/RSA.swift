@@ -7,7 +7,6 @@
 
 import Foundation
 import Algorithms
-import CryptoKit
 
 public final class RSA {
     private init() {}
